@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="left">
+        <h1>Add
+            Department
+        </h1>
+        <form id="record-form" [formGroup]="departmentForm" (ngSubmit)="addDepartment()">
+            <input type="text" id="department_Name" placeholder="Department Name" required
+                formControlName="department_Name">
+            <button type="submit" class="button">Add Record</button>
+            <!-- <input type="hidden" id="edit-index" value="-1"> -->
+        </form>
+    </div>
+
+</div>
+
+<div class="right">
+    <h2>Records</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>S.N</th>
+                <th>Department Name</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="departmentData">
+            <tr *ngFor="let item of departmentData ; let i = index">
+                <td>{{i +1}}</td>
+                <td>{{item.department_Name}}</td>
+                <td><button>Edit</button></td>
+                <td><button (click)="removeDepartment(item.department_Id)">Delete</button></td>
+            </tr>
+        </tbody>
+
+    </table>
+</div>

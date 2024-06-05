@@ -1,0 +1,61 @@
+<div class="form-container container">
+    <h1 class="fs-1">Sign Up Form</h1>
+    <form action="" [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+
+        <div class="row">
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Name" formControlName="name">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Email" formControlName="email">
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Phone Number" formControlName="phone">
+            </div>
+            <div class="col">
+                <input type="date" class="form-control" placeholder="Date of Birth" formControlName="dob">
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Username" formControlName="username">
+            </div>
+            <div class="col password-eye">
+                <input [type]="this.isPassword ? 'password' : 'text'" class="form-control " placeholder="Password"
+                    formControlName="password">
+                <label for="password" class="btn btn-primary eye-btn" (click)="showPassword()"></label>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Address" formControlName="address">
+            </div>
+
+            <!-- <div class="row mb-2" style="margin-inline-start: 1px;"><label for="radioOptions">Gender: </label>
+            </div> -->
+            <div class="col mt-2 ms-1">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="male" value="1"
+                        formControlName="gender" checked>
+                    <label class="form-check-label" for="male">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="female" value="2"
+                        formControlName="gender">
+                    <label class="form-check-label" for="female">Female</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="others" value="3"
+                        formControlName="gender">
+                    <label class="form-check-label" for="others">Others</label>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-2">Submit</button>
+    </form>
+</div>
