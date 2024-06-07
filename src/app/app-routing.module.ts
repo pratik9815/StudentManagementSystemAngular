@@ -6,6 +6,7 @@ import { NavbarComponentComponent } from './navbar-component/navbar-component.co
 import { AppComponent } from './app.component';
 import { DepartmentComponent } from './department/department.component';
 import { SigninComponent } from './signin/signin.component';
+import { authGuard } from './service/auth/auth.guard';
 
 const routes: Routes = [
   {
@@ -19,11 +20,15 @@ const routes: Routes = [
   },
   {
     path: 'registration',
-    component: RegistrationComponentComponent
+    component: RegistrationComponentComponent,
+
   },
   {
     path: 'department',
-    component: DepartmentComponent
+    component: DepartmentComponent,
+    canActivate: [
+      authGuard
+    ]
   },
   {
     path: 'signup',

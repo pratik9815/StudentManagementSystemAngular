@@ -6,11 +6,10 @@ import { Injectable } from '@angular/core';
 })
 export class SigninService {
 
-  apiUrl: string = '';
+  apiUrl: string = 'https://localhost:7293/api/ApplicationUser/add-user';
   constructor(private _httpClient: HttpClient) { }
 
   OnPost(body: any) {
-    console.log(body);
     return this._httpClient.post(this.apiUrl, body);
   }
 

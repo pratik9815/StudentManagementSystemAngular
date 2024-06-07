@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { LoginService } from '../service/login/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-component',
@@ -8,19 +10,34 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 })
 export class LoginComponentComponent implements OnInit {
 
-  myForm: any;
+  myForm!: FormGroup;
+  responseData: any;
   //  myForm : FormGroup | undefined;
 
-  constructor() { }
+  constructor(private _loginService: LoginService, private _router: Router, private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.myForm = new FormGroup({
-      username: new FormControl(''),
-      password: new FormControl('')
-    });
+    this.myForm = this._formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    })
   }
 
   onSubmit(form: FormGroup): void {
-    console.log(form.value);
+    this._loginService.OnLogin(form.value).subscribe({
+      next: res => {
+        if (res != null) {
+          this.responseData = res;
+          localStorage.setItem('token', this.responseData);
+          this._router.navigate(['department']);
+        }
+        this.myForm.reset();
+      },
+      error: err => {
+        console.log(err);
+      }
+    }
+
+    )
   }
 }

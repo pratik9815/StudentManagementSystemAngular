@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SigninService } from '../service/signin/signin.service';
 import { AddUser } from './interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
@@ -17,7 +18,7 @@ export class SigninComponent implements OnInit {
 
 
   constructor(private _formBuilder: FormBuilder,
-    private _signinService: SigninService
+    private _signinService: SigninService, private _router: Router
   ) { }
 
   ngOnInit(): void {
@@ -37,7 +38,8 @@ export class SigninComponent implements OnInit {
   onSubmit() {
     if (this.signinForm.invalid)
       return;
-    console.log(this.signinForm.value);
+
+
     const data: AddUser = {
       Name: this.signinForm.value.name,
       Phone: this.signinForm.value.phone,
@@ -50,9 +52,12 @@ export class SigninComponent implements OnInit {
       Password: this.signinForm.value.password
     }
     console.log(data);
-    this._signinService.OnPost(this.signinForm.value).subscribe({
+    this._signinService.OnPost(data).subscribe({
       next: (data) => {
-        console.log(data);
+        if (data) {
+          this._router.navigate(['/login']);
+        }
+        this.signinForm.reset();
       },
       error: (err) => {
         console.log(err);
